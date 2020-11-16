@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Покупка</title>
+</head>
+<body>
+    <div>
+        <h3>Форма оформления покупки</h3>
+            @using (Html.BeginForm("Buy", "Home", FormMethod.Post))
+            {
+                @Html.Hidden("ProductId", ViewBag.ProductId as string)
+    <table>
+        <tr>
+            <td><p>Введите свое имя </p></td>
+            <td>
+                @Html.TextBox("Customer")
+            </td>
+        </tr>
+        <tr>
+            <td><p>Введите адрес :</p></td>
+            <td>
+                @Html.TextBox("Address")
+            </td>
+        </tr>
+        <tr>
+            <td><p>Оставьте комментарий к заказу:</p></td>
+            <td>
+                @Html.TextArea("Comment", "Комментарий можете написать тут", 5, 50, null)
+            </td>
+        </tr>
+        <tr>
+            <td><p>Вам перезвонить?</p></td>
+            <td>
+                @Html.CheckBox("Confirm Call", false)
+            </td>
+        </tr>
+        <tr>
+            <td><p>Выберете удобное время для звонка:</p></td>
+            <td>
+                @Html.RadioButton("time", "8-10 a.m.")
+                <span>8-10 a.m.</span> <br />
+                @Html.RadioButton("time", "10-12 a.m.")
+                <span>10-12 a.m.</span> <br />
+                @Html.RadioButton("time", "12-15 p.m.")
+                <span>12-15 p.m.</span> <br />
+                @Html.RadioButton("time", "15-17 p.m.")
+                <span>15-17 p.m.</span> <br />
+            </td>
+            <td><p>Введите секретный 4х-значный код подтверждения:</p></td>
+            <td>
+                @Html.Password("Password")
+            </td>
+        </tr>
+        <tr>
+            <td><p>Выберете день доставки:</p></td>
+            <td>
+                @Html.DropDownList("days", new SelectList(new DayOfWeek[] { 
+               DayOfWeek.Monday, 
+               DayOfWeek.Tuesday,
+               DayOfWeek.Wednesday, 
+               DayOfWeek.Thursday,
+               DayOfWeek.Friday }))
+            </td>
+        </tr>
+        <tr>
+            <td><p>Отметьте дополнительные опции доставки:</p></td>
+            <td>
+                @Html.ListBox("options", new MultiSelectList(new string[] {
+                "Поднятие товара на этаж => +490 р.",
+                "Распаковка товара => +390 р.",
+                "Установка и подключение => +690 р.",
+                "Настройка => +790 р.",
+                "Обучение использования => +490 р."}))
+            </td>
+        </tr>
+        <tr><td><input type="submit" value="Отправить" /></td><td></td></tr>
+    </table>
+            }
+    </div>
+</body>
+</html>
